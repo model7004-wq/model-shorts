@@ -1,0 +1,10 @@
+{
+  "name": "모델쇼츠",
+  "short_name": "모델쇼츠",
+  "description": "사진 몇 장으로 쇼츠·릴스 영상 자동 만들기",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#ff4d6d",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }]
+}

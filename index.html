@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모델쇼츠</title>
+<meta name="description" content="사진 몇 장으로 유튜브 쇼츠·인스타 릴스 영상을 자동으로 만들어 주는 모델스튜디오의 무료 도구">
+<meta name="theme-color" content="#ff4d6d">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>🎬 모델쇼츠 <small id="studioName"></small></h1>
+  <button class="btn small ghost" id="btnSettings">⚙️ 설정</button>
+</header>
+
+<main>
+  <section class="card" id="settings" hidden>
+    <h2>⚙️ 사진관 정보 <span class="muted">영상 마지막 화면과 설명에 들어가요 · 이 기기에만 저장돼요</span></h2>
+    <div class="grid">
+      <label>사진관 이름<input id="s_name"></label>
+      <label>지역<input id="s_region"></label>
+      <label class="wide">한 줄 소개<input id="s_tagline"></label>
+      <label>전화번호<input id="s_phone" inputmode="tel"></label>
+      <label>주소<input id="s_address"></label>
+    </div>
+    <div class="row between">
+      <span class="msg" id="settingsMsg"></span>
+      <button class="btn primary" id="btnSaveSettings">저장하기</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">1</span> 사진 넣기 <span class="muted" id="photoCount"></span></h2>
+    <div class="drop" id="drop">
+      <div class="drop-big">📂</div>
+      <div>여기를 눌러 사진을 고르거나 <b>끌어다 놓으세요</b></div>
+      <div class="muted">5~10장이 딱 좋아요 (최대 20장) · 사진은 인터넷에 올라가지 않고 이 기기 안에서만 써요</div>
+      <input type="file" id="fileInput" accept="image/*" multiple hidden>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="msg" id="photoMsg"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">2</span> 무슨 사진인가요?</h2>
+    <div class="topics" id="topics"></div>
+    <div id="postBox" hidden>
+      <label>영상 제목 <span class="muted">(영상 위에도 크게 나와요)</span>
+        <div class="row nowrap"><input id="p_title" maxlength="60"><button class="btn small" id="btnReroll">🎲 다른 제목</button></div>
+      </label>
+      <label>설명<textarea id="p_desc" rows="4"></textarea></label>
+      <label>해시태그 <span class="muted">(띄어쓰기로 구분)</span><input id="p_tags"></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">3</span> 배경음악 <span class="muted">(안 해도 돼요)</span></h2>
+    <div class="row">
+      <span id="musicName">🎵 기본 잔잔한 음악 (저작권 걱정 없음)</span>
+      <button class="btn small" id="btnMusic">내 음악 넣기</button>
+      <button class="btn small ghost" id="btnMusicDel" hidden>기본 음악으로</button>
+      <input type="file" id="musicInput" accept="audio/*" hidden>
+    </div>
+    <p class="muted">내 음악은 유튜브 오디오 보관함처럼 무료로 써도 되는 음악만 넣어주세요.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">4</span> 영상 만들기</h2>
+    <button class="btn big primary wide-btn" id="btnMake">🎬 영상 만들기</button>
+    <div class="status" id="status" hidden>
+      <div class="status-msg" id="statusMsg"></div>
+      <div class="bar" id="barWrap"><div id="bar"></div></div>
+    </div>
+    <div class="preview" id="preview" hidden>
+      <video id="video" controls playsinline></video>
+      <div class="preview-side">
+        <div id="videoInfo" class="muted"></div>
+        <button class="btn primary" id="btnShare" hidden>📤 인스타·유튜브로 보내기</button>
+        <a class="btn" id="btnSave" download>💾 영상 저장하기</a>
+        <button class="btn" id="btnCopy">📋 설명+해시태그 복사</button>
+        <div class="row">
+          <a class="btn yt small" href="https://studio.youtube.com/" target="_blank" rel="noopener">▶️ 유튜브 스튜디오</a>
+          <a class="btn ig small" href="https://www.instagram.com/" target="_blank" rel="noopener">📷 인스타그램</a>
+        </div>
+        <p class="muted" id="howto"></p>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot muted">모델쇼츠 · 문경 모델스튜디오 · <a href="https://model7004-wq.github.io/model-studio-homepage/">홈페이지</a></p>
+</main>
+<canvas id="canvas" width="1080" height="1920" hidden></canvas>
+<script src="mp4-muxer.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
